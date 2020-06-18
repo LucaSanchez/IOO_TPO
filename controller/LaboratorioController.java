@@ -20,6 +20,14 @@ public class LaboratorioController {
 	ArrayList<Resultado> resultados;
 	ArrayList<Rol> roles;
 	
+	public Usuario buscarUsuario(String usr) {
+		for (Usuario u : usuarios) {
+			if (u.getNombre_usuario().equals(usr)) {
+				return u;
+			}
+		}
+		return null;
+	}
 
 	public void altaUsuario(String nombre_usuario, String mail,String password,String  nombre, String  domicilio,String  dni,String  fecha_nacimiento){
 		
@@ -66,5 +74,7 @@ public class LaboratorioController {
 		}
 		System.out.println("El usuario " + usr + " no ha sido encontrado");
 	}
+	
+	
 	
 }
