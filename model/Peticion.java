@@ -2,6 +2,7 @@ package model;
 
 public class Peticion {
 	
+	private static int newId = 1;
 	int id_peticion;
 	String paciente;
 	String obrasocial;
@@ -12,6 +13,8 @@ public class Peticion {
 	public Peticion(String paciente, String obrasocial, String fecha_carga, String practicas_asociadas,
 			String fecha_entrega) {
 		super();
+		this.id_peticion = this.newId;
+		this.newId = this.newId++;
 		this.paciente = paciente;
 		this.obrasocial = obrasocial;
 		this.fecha_carga = fecha_carga;
@@ -58,6 +61,16 @@ public class Peticion {
 	public void setFecha_entrega(String fecha_entrega) {
 		this.fecha_entrega = fecha_entrega;
 	}
+
+	public int getId_peticion() {
+		return id_peticion;
+	}
+
+	public void setId_peticion(int id_peticion) {
+		this.id_peticion = id_peticion;
+	}
+	
+	
 	
 	
 }

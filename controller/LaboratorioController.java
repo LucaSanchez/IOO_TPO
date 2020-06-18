@@ -20,6 +20,18 @@ public class LaboratorioController {
 	ArrayList<Resultado> resultados;
 	ArrayList<Rol> roles;
 	
+	public LaboratorioController() {
+
+		usuarios = new ArrayList<Usuario>();
+		pacientes = new ArrayList<Paciente>();
+		sucursales = new ArrayList<Sucursal>();
+		practicas = new ArrayList<Practica>();
+		peticiones = new ArrayList<Peticion>();
+		resultados = new ArrayList<Resultado>();
+		roles = new ArrayList<Rol>();
+	}
+	
+	
 	public Usuario buscarUsuario(String usr) {
 		for (Usuario u : usuarios) {
 			if (u.getNombre_usuario().equals(usr)) {
@@ -244,6 +256,73 @@ public class LaboratorioController {
 			}
 		}
 		System.out.println("La practica " + cod + " no ha sido encontrada");
+	}
+	
+	public Peticion buscarPeticion(int idPeticion) {
+		for (Peticion p : peticiones) {
+			if (p.getId_peticion() == idPeticion) {
+				return p;
+			}
+		}
+		return null;
+	}
+
+	public void altaPeticion(String paciente, String obrasocial, String fecha_carga, String practicas_asociadas,
+			String fecha_entrega) {
+
+		Peticion p = new Peticion(paciente, obrasocial, fecha_carga, practicas_asociadas, fecha_entrega);
+		peticiones.add(p);
+	}
+
+	public boolean bajaPeticion(int idPeticion) {
+		// busco al usuario en la lista de usuarios y lo borro si lo encuentro
+
+		for (Peticion p : peticiones) {
+			if (p.getId_peticion() == idPeticion) {
+				peticiones.remove(p);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void modifPeticion(int idPeticion, String paciente, String obrasocial, String fecha_carga, String practicas_asociadas,
+			String fecha_entrega) {
+		for (Peticion p : peticiones) {
+			if(p.getId_peticion() == idPeticion) {
+				p.setFecha_carga(fecha_carga);
+				p.setFecha_entrega(fecha_entrega);
+				p.setObrasocial(obrasocial);
+				p.setPaciente(paciente);
+				p.setPracticas_asociadas(practicas_asociadas);
+				return;
+			}
+		}
+	}
+	
+	public Resultado buscarResultado(int id_peticion, String codigo_practica) {
+		for (Resultado r : resultados) {
+			if (r.getCodigo_practica().equals(codigo_practica) && r.getId_peticion() == id_peticion) {
+				return r;
+			}
+		}
+		return null;
+	}
+	
+	public void altaResultado(int id_peticion, String codigo_practica) {
+
+		Resultado r = new Resultado(id_peticion, codigo_practica);
+		resultados.add(r);
+	}
+	
+	public void modifResultado(int id_peticion, String codigo_practica) {
+		
+		for(Resultado r : resultados) {
+			if(r.getCodigo_practica().equals(codigo_practica) && r.getId_peticion() == id_peticion) {
+				r.setCodigo_practica(codigo_practica);
+				r.setId_peticion(id_peticion);
+			}
+		}
 	}
 	
 }
